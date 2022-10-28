@@ -9,15 +9,24 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <p>Test</p>
-    <form onsubmit="return AddBookSubmit()">
-      <input type="text" id="BookName" placeholder="Book Name" />
-      <input type="text" id="Author" placeholder="Author" />
-      <input type="number" id="Pages" placeholder="Pages Read" />
-      <select name="Read" id="Read">
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-    </form>
+    <div class="BookPrompt">
+      <form onsubmit="return false;">
+        <input type="text" id="BookName" placeholder="Book Name" />
+        <input type="text" id="Author" placeholder="Author" />
+        <input type="number" id="Pages" placeholder="Pages Read" />
+        <select name="Read" id="Read">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+        <button
+          class="Add-book-button"
+          type="submit"
+          id="submit"
+          onclick="addBookToLibrary()"
+        >
+          Add Book
+        </button>
+      </form>
+    </div>
   </body>
 </html>

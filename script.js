@@ -1,10 +1,5 @@
-
-
-
-
-let myLibrary = [];
-
-function Book(author, title, pages, read) {
+function Book(pic, author, title, pages, read) {
+    this.pic = pic,
     this.author = author 
     this.title = title
     this.pages = pages 
@@ -15,17 +10,28 @@ function Book(author, title, pages, read) {
     }
 }
 
-const Book1 = new Book('steve', 'X', 8, 'true')
-const Book2 = new Book('Albert', 'y', 8, 'true')
+let myLibrary = JSON.parse(localStorage.getItem("Library") || "[]");
+console.log("# of Books: " + myLibrary.length);
 
+let i = 0;
 
-
-function addBookToLibrary() {
-
-   myLibrary.push(Book1, Book2)
-   console.log(myLibrary[0])
-    
+while (i < myLibrary.length) {
+    console.log(myLibrary[i]);
+    i++;
 }
 
+function addBookToLibrary() {
+    let bookname = document.getElementById("BookName").value;
+    let author = document.getElementById("Author").value;
+    let pages = document.getElementById("Pages").value;
+    let read = document.getElementById("Read").value;
+    
+    myLibrary.push(new Book(author, bookname, pages, read))
+    localStorage.setItem("Library", JSON.stringify(myLibrary));
 
-addBookToLibrary() // lo
+    }
+    
+
+
+
+

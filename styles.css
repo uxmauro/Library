@@ -1,0 +1,7 @@
+.BookPrompt{
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    height: 200px;
+    background-color: black;
+}
