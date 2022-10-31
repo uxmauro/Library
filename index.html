@@ -4,29 +4,65 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <title>The Bookclub</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
   </head>
   <body>
-    <div class="BookPrompt">
-      <form onsubmit="return false;">
-        <input type="text" id="BookName" placeholder="Book Name" />
-        <input type="text" id="Author" placeholder="Author" />
-        <input type="number" id="Pages" placeholder="Pages Read" />
-        <select name="Read" id="Read">
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-        <button
-          class="Add-book-button"
-          type="submit"
-          id="submit"
-          onclick="addBookToLibrary()"
-        >
-          Add Book
+    <header>
+      <a href="http://github.com/uxmauro" target="_blank">
+        <button style="width: 100px; height: 54px">
+          <iconify-icon
+            icon="akar-icons:github-fill"
+            style="font-size: x-large"
+          />
         </button>
-      </form>
+      </a>
+      <div class="main-title">
+        <iconify-icon
+          icon="emojione:books"
+          style="font-size: xx-large"
+        ></iconify-icon>
+        <h1>The Bookclub</h1>
+      </div>
+      <button onclick="lesso()">
+        New Book
+        <iconify-icon icon="bi:plus-circle-fill" />
+      </button>
+    </header>
+    <main>
+      <h1>No Books Yet?</h1>
+      <p>Click here to start adding books to your library.</p>
+      <iconify-icon
+        icon="bi:plus-circle-fill"
+        style="font-size: xxx-large; color: #0d4a81"
+      />
+    </main>
+    <div class="addbook">
+      <div class="addbookmodal">
+        <h2>New Book</h2>
+        <form onsubmit="return false;">
+          <input type="text" id="BookName" placeholder="Book Name" />
+          <input type="text" id="Author" placeholder="Author" />
+          <input type="number" id="Pages" placeholder="Pages Read" />
+          <select name="Read" id="Read">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <input type="file" id="img" name="img" accept="image/*" />
+          <input type="text" id="Pic" placeholder="pic" />
+          <button
+            class="Add-book-button"
+            type="submit"
+            id="submit"
+            onclick="addBookToLibrary()"
+          >
+            Save
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
