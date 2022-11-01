@@ -39,12 +39,16 @@ function addBookToLibrary() {
     
     myLibrary.push(new Book(pic, author, bookname, pages, read))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
-
+    closeModal()
     }
     
 
 
-function lesso(){
-    console.log("testing")
+function OpenModal(){
+    document.querySelector('.addbook').style.visibility = "visible"
 }
+
+function closeModal(){
+     document.querySelector('.addbook').style.visibility = "hidden"
+   }
 

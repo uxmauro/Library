@@ -27,34 +27,59 @@
         ></iconify-icon>
         <h1>The Bookclub</h1>
       </div>
-      <button onclick="lesso()">
+      <button onclick="OpenModal()">
         New Book
         <iconify-icon icon="bi:plus-circle-fill" />
       </button>
     </header>
     <main>
       <h1>No Books Yet?</h1>
-      <p>Click here to start adding books to your library.</p>
-      <iconify-icon
-        icon="bi:plus-circle-fill"
-        style="font-size: xxx-large; color: #0d4a81"
-      />
+      <button
+        style="
+          background: none;
+          color: inherit;
+          border: none;
+          padding: 0;
+          font: inherit;
+          cursor: pointer;
+          outline: inherit;
+        "
+        onclick="OpenModal()"
+      >
+        <p>Click here to start adding books to your library.</p>
+        <iconify-icon
+          icon="bi:plus-circle-fill"
+          style="font-size: xxx-large; color: #0d4a81"
+        />
+      </button>
     </main>
+
     <div class="addbook">
       <div class="addbookmodal">
         <h2>New Book</h2>
         <form onsubmit="return false;">
-          <input type="text" id="BookName" placeholder="Book Name" />
-          <input type="text" id="Author" placeholder="Author" />
-          <input type="number" id="Pages" placeholder="Pages Read" />
-          <select name="Read" id="Read">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+          <label for="BookName">Book Name</label>
+          <input type="text" id="BookName" />
+          <label for="Author">Author</label>
+          <input type="text" id="Author" />
+          <div class="pagenread">
+            <div style="display: flex; flex-direction: column; width: 48%">
+              <label for="Pages">Pages</label>
+              <input type="number" id="Pages" step="1" value="1" min="1" />
+            </div>
+            <div style="display: flex; flex-direction: column; width: 48%">
+              <label for="Read">Finished Reading</label>
+              <select name="Read" id="Read">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          <label for="img">Book Image (Optional)</label>
           <input type="file" id="img" name="img" accept="image/*" />
-          <input type="text" id="Pic" placeholder="pic" />
+          <input type="text" id="Pic" placeholder="Add URL" />
           <button
-            class="Add-book-button"
+            class="addbookbutton"
             type="submit"
             id="submit"
             onclick="addBookToLibrary()"
