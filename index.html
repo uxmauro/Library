@@ -64,11 +64,13 @@
           <input type="text" id="Author" />
           <div class="pagenread">
             <div style="display: flex; flex-direction: column; width: 48%">
-              <label for="Pages">Pages</label>
+              <label for="Pages" style="margin-bottom: 8px">Pages</label>
               <input type="number" id="Pages" step="1" value="1" min="1" />
             </div>
-            <div style="display: flex; flex-direction: column; width: 48%">
-              <label for="Read">Finished Reading</label>
+            <div style="display: flex; flex-direction: column; width: 50%">
+              <label for="Read" style="margin-bottom: 8px"
+                >Finished Reading</label
+              >
               <select name="Read" id="Read">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -76,7 +78,22 @@
             </div>
           </div>
           <label for="img">Book Image (Optional)</label>
-          <input type="file" id="img" name="img" accept="image/*" />
+          <div class="imgUpload" onclick="uploadImage()">
+            <label for="img">
+              <iconify-icon
+                icon="fa-solid:cloud-upload-alt"
+                class="uploadIcon"
+              />
+
+              <input id="img" type="file" accept="image/png, image/jpeg;" />
+            </label>
+
+            <h3 id="imageName">Upload</h3>
+          </div>
+          <div class="addImgSpacer">
+            <p>Or</p>
+          </div>
+
           <input type="text" id="Pic" placeholder="Add URL" />
           <button
             class="addbookbutton"

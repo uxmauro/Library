@@ -6,7 +6,7 @@ function Book(pic, author, title, pages, read) {
     this.pages = pages 
     this.read = read
 
-    if (pic == "") {
+    if (pic == "" && img == "") {
         this.pic = "https://unsplash.com/photos/658ElZwWXGY"
     }
 
@@ -31,6 +31,7 @@ while (i < myLibrary.length) {
 
 //Add Book To Library
 function addBookToLibrary() {
+    let img = document.getElementById('img').value
     let pic = document.getElementById("Pic").value;
     let bookname = document.getElementById("BookName").value;
     let author = document.getElementById("Author").value;
@@ -50,5 +51,17 @@ function OpenModal(){
 
 function closeModal(){
      document.querySelector('.addbook').style.visibility = "hidden"
+     console.log(img)
    }
 
+   
+   function uploadImage() {
+    
+       let inputImg = document.getElementById("img");
+       let imageName = document.getElementById("imageName")
+
+    inputImg.addEventListener("change", ()=>{
+        imageName.innerText = "Uploaded";
+        imageName.style.color = "#73E114";
+    })
+}
