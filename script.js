@@ -54,14 +54,33 @@ function closeModal(){
      console.log(img)
    }
 
-   
-   function uploadImage() {
-    
-       let inputImg = document.getElementById("img");
-       let imageName = document.getElementById("imageName")
+   let thisshit = document.querySelector("#img");
 
-    inputImg.addEventListener("change", ()=>{
-        imageName.innerText = "Uploaded";
-        imageName.style.color = "#73E114";
-    })
+   thisshit.addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.addEventListener("load", ()=>{
+    localStorage.setItem("BookImage", reader.result);
+    });
+    reader.readAsDataURL(this.files[0]); 
+   });
+
+   document.addEventListener("DOMContentLoaded", () => {
+    const recentImageDataUrl = localStorage.getItem("BookImage");
+ 
+    if (recentImageDataUrl) {
+         document.querySelector("#Preview").setAttribute("src", recentImageDataUrl);
+ }
+ });
+
+   /* 
+   document.querySelector("#img").addEventListener("change", function() {
+       
+      
+     
+   }); */
+
+   function uploadImage() {
+    console.log('wut')
 }
+
+   
