@@ -11,14 +11,14 @@
   </head>
   <body>
     <header>
-      <a href="http://github.com/uxmauro" target="_blank">
-        <button style="width: 100px; height: 54px">
-          <iconify-icon
-            icon="akar-icons:github-fill"
-            style="font-size: x-large"
-          />
-        </button>
-      </a>
+      <!--  <a href="http://github.com/uxmauro" target="_blank"> -->
+      <button onclick="addBookToList()" style="width: 100px; height: 54px">
+        <iconify-icon
+          icon="akar-icons:github-fill"
+          style="font-size: x-large"
+        />
+      </button>
+      <!--  </a> -->
       <div class="main-title">
         <iconify-icon
           icon="emojione:books"
@@ -55,10 +55,48 @@
       </div>
       <div class="full-state">
         <div class="title-bar">
-          <h4>BookName</h4>
-          <h4>Author</h4>
-          <h4>Pages</h4>
-          <h4>Finished Reading</h4>
+          <div style="margin-left: 5vw"><h4>BookName</h4></div>
+          <div>
+            <div class="divider"></div>
+            <h4>Author</h4>
+          </div>
+          <div>
+            <div class="divider"></div>
+            <h4>Pages</h4>
+          </div>
+          <div>
+            <div class="divider"></div>
+            <h4>Finished Reading</h4>
+          </div>
+        </div>
+        <div id="listofBooks">
+          <div class="BookItem">
+            <div class="BookDetails">
+              <div class="BookImgName">
+                <div id="BookImgpreview"></div>
+                <p id="BookName-List">jhdjhdjfkjdbkjbdjjdjknd</p>
+              </div>
+              <p id="Author-List">Aygygugxuth</p>
+              <p id="Pages-List">3</p>
+              <label for="check">
+                <input type="checkbox" id="check" />
+              </label>
+            </div>
+            <div class="List-Actions">
+              <button>
+                <iconify-icon
+                  icon="fa:pencil"
+                  style="font-size: large; color: #0d4a81"
+                />
+              </button>
+              <button>
+                <iconify-icon
+                  icon="fa-solid:trash-alt"
+                  style="font-size: large; color: #0d4a81"
+                />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -118,5 +156,3 @@
     <script src="script.js"></script>
   </body>
 </html>
-
-<!-- <img src="" id="Preview" style="width: 100px; height: 100px" alt="" /> -->
