@@ -7,7 +7,7 @@ let i = 0;
 
 while (i < myLibrary.length) {
     console.table(myLibrary[i]);
-    addBookToList(myLibrary[i].author, myLibrary[i].title, myLibrary[i].pages, myLibrary[i].read)
+    addBookToList(myLibrary[i].pic, myLibrary[i].author, myLibrary[i].title, myLibrary[i].pages, myLibrary[i].read)
     i++;
 }
 
@@ -28,8 +28,8 @@ function Book(pic, author, title, pages, read) {
     this.pages = pages 
     this.read = read
 
-    if (pic == "" && img == "") {
-        this.pic = "https://unsplash.com/photos/658ElZwWXGY"
+    if (pic == "" || img == "") {
+        this.pic = "https://avatars.githubusercontent.com/u/77753281?v=4"
     }
 
     this.returnBook = function(){
@@ -52,7 +52,7 @@ function addBookToLibrary() {
     myLibrary.push(new Book(pic, author, bookname, pages, read))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
     closeModal()
-    addBookToList(author, bookname, pages, read)
+    addBookToList(pic, author, bookname, pages, read)
     }
     
 
@@ -86,10 +86,10 @@ function closeModal(){
  });
 
  //Add Styling to list
- function addBookToList(author, bookname, pages, read) {
+ function addBookToList(pic, author, bookname, pages, read) {
     const BookItem = document.createElement("div");
     BookItem.classList.add('BookItem');
-    document.getElementById("listofBooks").appendChild(BookItem);
+    document.getElementById("listofBooks").prepend(BookItem);
     
     const BookDetails = document.createElement("div");
     BookDetails.classList.add('BookDetails');
@@ -101,6 +101,7 @@ function closeModal(){
 
     const BookImgpreview = document.createElement("div");
     BookImgpreview.setAttribute('id','BookImgpreview');
+    document.getElementById("BookImgpreview").style.backgroundImage = 'url('+ pic +')'
     BookImgName.appendChild(BookImgpreview);
 
     const BookName =  document.createElement("p")
