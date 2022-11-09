@@ -1,3 +1,25 @@
+//Library
+
+let myLibrary = JSON.parse(localStorage.getItem("Library") || "[]");
+console.log("# of Books: " + myLibrary.length);
+
+let i = 0;
+
+while (i < myLibrary.length) {
+    console.table(myLibrary[i]);
+    addBookToList(myLibrary[i].author, myLibrary[i].title, myLibrary[i].pages, myLibrary[i].read)
+    i++;
+}
+
+if (myLibrary.length < 0) {
+  
+  document.querySelector('.empty-state').style.display = "flex"
+  document.querySelector('.full-state').style.display = "none"
+
+}
+
+
+
 //Book Constructor
 function Book(pic, author, title, pages, read) {
     this.pic = pic,
@@ -15,17 +37,7 @@ function Book(pic, author, title, pages, read) {
     }
 }
 
-//Library
 
-let myLibrary = JSON.parse(localStorage.getItem("Library") || "[]");
-console.log("# of Books: " + myLibrary.length);
-
-let i = 0;
-
-while (i < myLibrary.length) {
-    console.log(myLibrary[i]);
-    i++;
-}
 
 
 //Add Book To Library
@@ -40,6 +52,7 @@ function addBookToLibrary() {
     myLibrary.push(new Book(pic, author, bookname, pages, read))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
     closeModal()
+    addBookToList(author, bookname, pages, read)
     }
     
 
@@ -50,12 +63,13 @@ function OpenModal(){
 
 function closeModal(){
      document.querySelector('.addbook').style.visibility = "hidden"
+     document.querySelector('#BookForm').reset();
      console.log(img)
    }
 
-   let thisshit = document.querySelector("#img");
+   let getImg = document.querySelector("#img");
 
-   thisshit.addEventListener("change", function () {
+   getImg.addEventListener("change", function () {
     const reader = new FileReader();
     reader.addEventListener("load", ()=>{
     localStorage.setItem("BookImage", reader.result);
@@ -71,7 +85,8 @@ function closeModal(){
  }
  });
 
- function addBookToList() {
+ //Add Styling to list
+ function addBookToList(author, bookname, pages, read) {
     const BookItem = document.createElement("div");
     BookItem.classList.add('BookItem');
     document.getElementById("listofBooks").appendChild(BookItem);
@@ -90,19 +105,19 @@ function closeModal(){
 
     const BookName =  document.createElement("p")
     BookName.setAttribute("id", "BookName-List")
-    let textToAdd = document.createTextNode("Text to be added")
+    let textToAdd = document.createTextNode(bookname)
     BookName.appendChild(textToAdd)
     BookImgName.appendChild(BookName)
 
     const Author = document.createElement("p")
     Author.setAttribute("id", "Author-List")
-    let textToAddAuth = document.createTextNode("Text to be added")
+    let textToAddAuth = document.createTextNode(author)
     Author.appendChild(textToAddAuth)
     BookDetails.appendChild(Author)
 
     const Pages = document.createElement("p")
     Pages.setAttribute("id", "Pages-List")
-    let textToAddPages = document.createTextNode("# of pages")
+    let textToAddPages = document.createTextNode(pages)
     Pages.appendChild(textToAddPages)
     BookDetails.appendChild(Pages)
 
@@ -110,6 +125,9 @@ function closeModal(){
     const CheckLabel = document.createElement("label")
     const Checkbox = document.createElement("input")
     Checkbox.setAttribute("id", "check")
+    if (read == "Yes") {
+      Checkbox.checked = true;
+    }
     Checkbox.type = "checkbox"
     CheckLabel.appendChild(Checkbox)
     BookDetails.appendChild(CheckLabel)
@@ -127,47 +145,4 @@ function closeModal(){
     console.log('uploadImage')
 }
 
-   /* 
-<div class="BookItem">
 
-<div class="BookDetails">
-
-                <div class="BookImgName">
-
-                <div id="BookImgpreview"></div>  <p id="BookName-List">jhdjhdjfkjdbkjbdjjdjknd</p>
-            
-                </div>
-
-        <p id="Author-List">Aygygugxuth</p>
-            <p id="Pages-List">3</p>
-    <label f
-    or="check">
-      <input type="checkbox" id="check" />
-    </label>
-</div>
-  <div class="List-Actions">
-    <button>
-      <iconify-icon
-        icon="fa:pencil"
-        style="font-size: large; color: #0d4a81"
-      />
-    </button>
-    <button>
-      <iconify-icon
-        icon="fa-solid:trash-alt"
-        style="font-size: large; color: #0d4a81"
-      />
-    </button>
-  </div>
-</div>
-</div> */
-
-
-/* 
-function addBookToList() {
-    const BookItem = document.createElement("div");
-    BookItem.classList.add('BookItem');
-    const textnode = document.createTextNode("Water");
-    BookItem.appendChild(textnode);
-    document.getElementById("listofBooks").appendChild(BookItem);
- } */

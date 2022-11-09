@@ -11,14 +11,14 @@
   </head>
   <body>
     <header>
-      <!--  <a href="http://github.com/uxmauro" target="_blank"> -->
-      <button onclick="addBookToList()" style="width: 100px; height: 54px">
-        <iconify-icon
-          icon="akar-icons:github-fill"
-          style="font-size: x-large"
-        />
-      </button>
-      <!--  </a> -->
+      <a href="http://github.com/uxmauro" target="_blank">
+        <button style="width: 100px; height: 54px">
+          <iconify-icon
+            icon="akar-icons:github-fill"
+            style="font-size: x-large"
+          />
+        </button>
+      </a>
       <div class="main-title">
         <iconify-icon
           icon="emojione:books"
@@ -104,7 +104,7 @@
     <div class="addbook">
       <div class="addbookmodal">
         <h2>New Book</h2>
-        <form onsubmit="return false;">
+        <form id="BookForm" onsubmit="return false;">
           <label for="BookName">Book Name</label>
           <input type="text" id="BookName" />
           <label for="Author">Author</label>
