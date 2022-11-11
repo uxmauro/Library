@@ -4,21 +4,32 @@ let myLibrary = JSON.parse(localStorage.getItem("Library") || "[]");
 console.log("# of Books: " + myLibrary.length);
 
 let i = 0;
-
+//Onload Add Books from Localstorage
 while (i < myLibrary.length) {
     console.table(myLibrary[i]);
+    if (myLibrary[i].pic == "" ) {
+      myLibrary[i].pic = "/assets/Default-Book-Img.png"
+    }
     addBookToList(myLibrary[i].pic, myLibrary[i].author, myLibrary[i].title, myLibrary[i].pages, myLibrary[i].read)
     i++;
 }
 
-if (myLibrary.length < 0) {
+checkIfEmpty()
+
+function checkIfEmpty() {
+
+if (myLibrary.length < 1) {
   
   document.querySelector('.empty-state').style.display = "flex"
   document.querySelector('.full-state').style.display = "none"
 
+} else {
+  document.querySelector('.empty-state').style.display = "none"
+  document.querySelector('.full-state').style.display =  "flex"
+
 }
 
-
+}
 
 //Book Constructor
 function Book(pic, author, title, pages, read) {
@@ -28,10 +39,6 @@ function Book(pic, author, title, pages, read) {
     this.pages = pages 
     this.read = read
 
-    if (pic == "" || img == "") {
-        this.pic = "https://avatars.githubusercontent.com/u/77753281?v=4"
-    }
-
     this.returnBook = function(){
         console.log(author, title, pages, read)
     }
@@ -40,7 +47,8 @@ function Book(pic, author, title, pages, read) {
 
 
 
-//Add Book To Library
+
+//Add Book To Library // From Save Modal
 function addBookToLibrary() {
     let img = document.getElementById('img').value
     let pic = document.getElementById("Pic").value;
@@ -48,10 +56,16 @@ function addBookToLibrary() {
     let author = document.getElementById("Author").value;
     let pages = document.getElementById("Pages").value;
     let read = document.getElementById("Read").value;
+
+    
+    if(pic == ""){
+      pic = "/assets/Default-Book-Img.png"
+    }
     
     myLibrary.push(new Book(pic, author, bookname, pages, read))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
     closeModal()
+    checkIfEmpty()
     addBookToList(pic, author, bookname, pages, read)
     }
     
@@ -67,29 +81,13 @@ function closeModal(){
      console.log(img)
    }
 
-   let getImg = document.querySelector("#img");
 
-   getImg.addEventListener("change", function () {
-    const reader = new FileReader();
-    reader.addEventListener("load", ()=>{
-    localStorage.setItem("BookImage", reader.result);
-    });
-    reader.readAsDataURL(this.files[0]); 
-   });
-
-   document.addEventListener("DOMContentLoaded", () => {
-    const recentImageDataUrl = localStorage.getItem("BookImage");
- 
-    if (recentImageDataUrl) {
-         document.querySelector("#BookImgpreview").setAttribute("style", "background-image: url(" +  recentImageDataUrl +")");
- }
- });
 
  //Add Styling to list
  function addBookToList(pic, author, bookname, pages, read) {
     const BookItem = document.createElement("div");
     BookItem.classList.add('BookItem');
-    document.getElementById("listofBooks").prepend(BookItem);
+    document.getElementById("listofBooks").appendChild(BookItem);
     
     const BookDetails = document.createElement("div");
     BookDetails.classList.add('BookDetails');
@@ -101,7 +99,7 @@ function closeModal(){
 
     const BookImgpreview = document.createElement("div");
     BookImgpreview.setAttribute('id','BookImgpreview');
-    document.getElementById("BookImgpreview").style.backgroundImage = 'url('+ pic +')'
+    BookImgpreview.style.backgroundImage = 'url('+ pic +')'
     BookImgName.appendChild(BookImgpreview);
 
     const BookName =  document.createElement("p")
@@ -135,15 +133,100 @@ function closeModal(){
 
     const ListActions = document.createElement("div")
     ListActions.classList.add("List-Actions")
-    ListActions.innerHTML =  '<button>' + '<iconify-icon icon="fa:pencil"    style="font-size: large; color: #0d4a81" />' + ' </button>' + '<button>' + '<iconify-icon icon="fa-solid:trash-alt"    style="font-size: large; color: #0d4a81" />' + ' </buuton'
+    ListActions.innerHTML =  '<button onclick="editBook()">' + '<iconify-icon icon="fa:pencil"    style="font-size: large; color: #0d4a81" />' + ' </button>' + '<button onclick="deleteBook(this)">' + '<iconify-icon icon="fa-solid:trash-alt"    style="font-size: large; color: #0d4a81" />' + ' </buuton'
     BookItem.appendChild(ListActions)
     
+    return BookItem;
+ }
 
+ function editBook() {
+  
  }
   
+
+function findInArray() {
+  
+}
+
+function deleteBook(e) {
+  
+  
+  
+  let Lib =  JSON.parse(localStorage.getItem("Library"));
+  let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
+  console.log(BooksDisplayed)
+  
+  let index = (BooksDisplayed.indexOf(e.parentNode.parentNode))
+  
+  e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+  
+  console.log(Lib)
+  
+  if (index > -1) {
+    Lib.splice(index, 1);
+  }
+  localStorage.setItem("Library", JSON.stringify(Lib));
+  
+  
+  if (BooksDisplayed.length == 1) {
+  
+    document.querySelector('.empty-state').style.display = "flex"
+    document.querySelector('.full-state').style.display = "none"
+  
+  }
+
+
+}
+
+
+
+ /* let BooksDisplayed = document.getElementById("listofBooks").childElementCount
+
+ console.log(BooksDisplayed) */
+/* 
+  console.log(e.parentNode.parentNode) */
+
+/*   let libo = localStorage.getItem("Library") ? JSON.parse(localStorage.getItem('Library')) : []
+  let libos = libo.splice(index, 1)
+  let lib = localStorage.setItem('Library', JSON.stringify(libos)); */
+  
+
+
+/* 
+const deleteLocal = () => {
+  let Library = JSON.parse(localStorage.getItem("Library"));
+  let indexLocalTask = getItemIndex(Library, BookItem);
+  Library.splice(indexLocalTask, 1);
+  localStorage.setItem("Library", JSON.stringify(Library));
+}; */
+
+
 
    function uploadImage() {
     console.log('uploadImage')
 }
+
+
+
+/* 
+let getImg = document.querySelector("#img");
+
+    getImg.addEventListener("change", function () {
+     const reader = new FileReader();
+     reader.addEventListener("load", ()=>{
+     localStorage.setItem("BookImage", reader.result);
+     });
+     reader.readAsDataURL(this.files[0]); 
+    });
+ 
+    document.addEventListener("DOMContentLoaded", () => {
+     const recentImageDataUrl = localStorage.getItem("BookImage");
+  
+     if (recentImageDataUrl) {
+          document.querySelector("#BookImgpreview").setAttribute("style", "background-image: url(" +  recentImageDataUrl +")");
+  }
+  }); */
+
+
 
 
