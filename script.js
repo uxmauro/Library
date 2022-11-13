@@ -2,6 +2,7 @@
 
 let myLibrary = JSON.parse(localStorage.getItem("Library") || "[]");
 console.log("# of Books: " + myLibrary.length);
+console.log(myLibrary)
 
 let i = 0;
 //Onload Add Books from Localstorage
@@ -15,7 +16,7 @@ while (i < myLibrary.length) {
 }
 
 checkIfEmpty()
-
+//initial state of the library
 function checkIfEmpty() {
 
 if (myLibrary.length < 1) {
@@ -45,26 +46,40 @@ function Book(pic, author, title, pages, read) {
 }
 
 
+//Adding images to localstorage takes up too much space
+/* let getImg = document.querySelector("#img");
+
+getImg.addEventListener("change", function () {
+ const reader = new FileReader();
+ reader.addEventListener("load", ()=>{
+ localStorage.push("BookImage", reader.result);
+ 
+ });
+ reader.readAsDataURL(this.files[0]); 
+});
+ */
 
 
 
 //Add Book To Library // From Save Modal
-function addBookToLibrary() {
-    let img = document.getElementById('img')
+function addBookToLibrary() {/* 
+    let img = document.getElementById('img') */
     let pic = document.getElementById("Pic").value;
     let bookname = document.getElementById("BookName").value;
     let author = document.getElementById("Author").value;
     let pages = document.getElementById("Pages").value;
     let read = document.getElementById("Read").value;
 
-    /* 
-     if(pic == "" && img == undefined ){
+    let uploadedImg = localStorage.getItem("BookImage"  || "[]")
+    console.log(uploadedImg)
+
+     if(pic == "" /* && img == undefined */ ){
      pic = "/assets/Default-Book-Img.png" 
     } 
     
-    if(img != undefined){
-     pic = read.result
-    } */
+ /*    if(img != undefined){
+     pic = uploadedImg
+    }  */
 
     myLibrary.push(new Book(pic, author, bookname, pages, read))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
@@ -72,7 +87,6 @@ function addBookToLibrary() {
     checkIfEmpty()
     addBookToList(pic, author, bookname, pages, read)
     }
-    
 
 
 function OpenModal(){
@@ -242,23 +256,7 @@ function deleteBook(e) {
 
 
 
-let getImg = document.querySelector("#img");
 
-getImg.addEventListener("change", function () {
- const reader = new FileReader();
- reader.addEventListener("load", ()=>{
- localStorage.setItem("BookImage", reader.result);
- });
- reader.readAsDataURL(this.files[0]); 
-});
-
-document.addEventListener("DOMContentLoaded", () => {
- const recentImageDataUrl = localStorage.getItem("BookImage");
-
- if (recentImageDataUrl) {
-      document.querySelector("#BookImgpreview").setAttribute("style", "background-image: url(" +  recentImageDataUrl +")");
-}
-});
 function uploadImage() {
      console.log("")
 }

@@ -122,6 +122,11 @@ iconify-icon {
     border-radius: 8px;
 }
 
+.titlebookname {
+    margin-left: 5vw;
+
+}
+
 .divider {
     width: 2px;
     height: 26px;
@@ -294,6 +299,30 @@ iconify-icon {
     border-radius: 20px;
 }
 
+@media only screen and (max-width: 720px) {
+    .addbookmodal {
+        width: 100vw;
+    }
+
+    .title-bar {
+        gap: 1vw
+    }
+
+    .titlebookname {
+        margin-left: 0vw;
+
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    main {
+        width: 96vw;
+    }
+}
+
+
 .addbookmodal h2 {
     color: #1D476D;
 }
@@ -321,6 +350,7 @@ input:focus {
     border: 1px solid #0D4A81;
     outline: 0;
 }
+
 
 select {
 
