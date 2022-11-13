@@ -70,9 +70,6 @@ function addBookToLibrary() {/*
     let pages = document.getElementById("Pages").value;
     let read = document.getElementById("Read").value;
 
-    let uploadedImg = localStorage.getItem("BookImage"  || "[]")
-    console.log(uploadedImg)
-
      if(pic == "" /* && img == undefined */ ){
      pic = "/assets/Default-Book-Img.png" 
     } 
@@ -214,7 +211,6 @@ function closeModal(){
     myLibraryEdit[index].pages = pages
     myLibraryEdit[index].read = read
     localStorage.setItem("Library", JSON.stringify(myLibraryEdit))
-    console.log (myLibraryEdit[index].author)
 
     closeModal()
  }
@@ -230,13 +226,11 @@ function deleteBook(e) {
   
   let Lib =  JSON.parse(localStorage.getItem("Library"));
   let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
-  console.log(BooksDisplayed)
   
   let index = (BooksDisplayed.indexOf(e.parentNode.parentNode))
   
   e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
   
-  console.log(Lib)
   
   if (index > -1) {
     Lib.splice(index, 1);
@@ -254,10 +248,4 @@ function deleteBook(e) {
 
 }
 
-
-
-
-function uploadImage() {
-     console.log("")
-}
 
