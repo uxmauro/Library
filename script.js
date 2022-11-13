@@ -50,18 +50,22 @@ function Book(pic, author, title, pages, read) {
 
 //Add Book To Library // From Save Modal
 function addBookToLibrary() {
-    let img = document.getElementById('img').value
+    let img = document.getElementById('img')
     let pic = document.getElementById("Pic").value;
     let bookname = document.getElementById("BookName").value;
     let author = document.getElementById("Author").value;
     let pages = document.getElementById("Pages").value;
     let read = document.getElementById("Read").value;
 
+    /* 
+     if(pic == "" && img == undefined ){
+     pic = "/assets/Default-Book-Img.png" 
+    } 
     
-    if(pic == ""){
-      pic = "/assets/Default-Book-Img.png"
-    }
-    
+    if(img != undefined){
+     pic = read.result
+    } */
+
     myLibrary.push(new Book(pic, author, bookname, pages, read))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
     closeModal()
@@ -78,7 +82,6 @@ function OpenModal(){
 function closeModal(){
      document.querySelector('.addbook').style.visibility = "hidden"
      document.querySelector('#BookForm').reset();
-     console.log(img)
    }
 
 
@@ -133,23 +136,82 @@ function closeModal(){
 
     const ListActions = document.createElement("div")
     ListActions.classList.add("List-Actions")
-    ListActions.innerHTML =  '<button onclick="editBook()">' + '<iconify-icon icon="fa:pencil"    style="font-size: large; color: #0d4a81" />' + ' </button>' + '<button onclick="deleteBook(this)">' + '<iconify-icon icon="fa-solid:trash-alt"    style="font-size: large; color: #0d4a81" />' + ' </buuton'
+    ListActions.innerHTML =  '<button onclick="editBook(this)">' + '<iconify-icon icon="fa:pencil"    style="font-size: large; color: #0d4a81" />' + ' </button>' + '<button onclick="deleteBook(this)">' + '<iconify-icon icon="fa-solid:trash-alt"    style="font-size: large; color: #0d4a81" />' + ' </buuton'
     BookItem.appendChild(ListActions)
     
-    return BookItem;
+
  }
 
- function editBook() {
+
+
+
+
+
+ function editBook(e) {
+
+  let Lib =  JSON.parse(localStorage.getItem("Library"));
+  let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
   
+  let BookIndex = (BooksDisplayed.indexOf(e.parentNode.parentNode))
+  
+  console.log(Lib[BookIndex].title)
+  OpenModal()
+  document.querySelector("#BookName").value = Lib[BookIndex].title
+  document.querySelector("#Author").value = Lib[BookIndex].author
+  document.querySelector("#Pages").value = Lib[BookIndex].pages
+  document.querySelector("#Read").value = Lib[BookIndex].read
+  if (Lib[BookIndex].pic == "/assets/Default-Book-Img.png") {
+    document.querySelector("#Pic").value = ""
+  }else{
+  document.querySelector("#Pic").value = Lib[BookIndex].pic}
+  document.getElementById("submit").setAttribute("onclick", "editBookModal("+ BookIndex +")")
+
+
+
  }
-  
+
+ function editBookModal(index){
+  let img = document.getElementById('img').value
+    let pic = document.getElementById("Pic").value;
+    let bookname = document.getElementById("BookName").value;
+    let author = document.getElementById("Author").value;
+    let pages = document.getElementById("Pages").value;
+    let read = document.getElementById("Read").value;
+   
+    if(pic == ""){
+      pic = "/assets/Default-Book-Img.png"
+    }
+
+    let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
+
+    BooksDisplayed[index].querySelector("#BookName-List").innerHTML = bookname
+    BooksDisplayed[index].querySelector("#Author-List").innerHTML = author
+    BooksDisplayed[index].querySelector("#Pages-List").innerHTML = pages
+    let Checkbox = BooksDisplayed[index].querySelector("#check")
+    if (read == "Yes") {
+     Checkbox.checked = true;
+    }else{
+      Checkbox.checked = false
+    }
+
+    let myLibraryEdit = JSON.parse(localStorage.getItem("Library"))
+    myLibraryEdit[index].title = bookname
+    myLibraryEdit[index].author = author
+    myLibraryEdit[index].pages = pages
+    myLibraryEdit[index].read = read
+    localStorage.setItem("Library", JSON.stringify(myLibraryEdit))
+    console.log (myLibraryEdit[index].author)
+
+    closeModal()
+ }
+
+
 
 function findInArray() {
   
 }
 
 function deleteBook(e) {
-  
   
   
   let Lib =  JSON.parse(localStorage.getItem("Library"));
@@ -180,53 +242,24 @@ function deleteBook(e) {
 
 
 
- /* let BooksDisplayed = document.getElementById("listofBooks").childElementCount
-
- console.log(BooksDisplayed) */
-/* 
-  console.log(e.parentNode.parentNode) */
-
-/*   let libo = localStorage.getItem("Library") ? JSON.parse(localStorage.getItem('Library')) : []
-  let libos = libo.splice(index, 1)
-  let lib = localStorage.setItem('Library', JSON.stringify(libos)); */
-  
-
-
-/* 
-const deleteLocal = () => {
-  let Library = JSON.parse(localStorage.getItem("Library"));
-  let indexLocalTask = getItemIndex(Library, BookItem);
-  Library.splice(indexLocalTask, 1);
-  localStorage.setItem("Library", JSON.stringify(Library));
-}; */
-
-
-
-   function uploadImage() {
-    console.log('uploadImage')
-}
-
-
-
-/* 
 let getImg = document.querySelector("#img");
 
-    getImg.addEventListener("change", function () {
-     const reader = new FileReader();
-     reader.addEventListener("load", ()=>{
-     localStorage.setItem("BookImage", reader.result);
-     });
-     reader.readAsDataURL(this.files[0]); 
-    });
- 
-    document.addEventListener("DOMContentLoaded", () => {
-     const recentImageDataUrl = localStorage.getItem("BookImage");
-  
-     if (recentImageDataUrl) {
-          document.querySelector("#BookImgpreview").setAttribute("style", "background-image: url(" +  recentImageDataUrl +")");
-  }
-  }); */
+getImg.addEventListener("change", function () {
+ const reader = new FileReader();
+ reader.addEventListener("load", ()=>{
+ localStorage.setItem("BookImage", reader.result);
+ });
+ reader.readAsDataURL(this.files[0]); 
+});
 
+document.addEventListener("DOMContentLoaded", () => {
+ const recentImageDataUrl = localStorage.getItem("BookImage");
 
-
+ if (recentImageDataUrl) {
+      document.querySelector("#BookImgpreview").setAttribute("style", "background-image: url(" +  recentImageDataUrl +")");
+}
+});
+function uploadImage() {
+     console.log("")
+}
 

@@ -102,6 +102,7 @@
     </main>
 
     <div class="addbook">
+      <div class="modalBack" onclick="closeModal()"></div>
       <div class="addbookmodal">
         <h2>New Book</h2>
         <form id="BookForm" onsubmit="return false;">
@@ -125,7 +126,7 @@
             </div>
           </div>
           <label for="img">Book Image (Optional)</label>
-          <div class="imgUpload" onclick="uploadImage()">
+          <div class="imgUpload">
             <label for="img">
               <iconify-icon
                 icon="fa-solid:cloud-upload-alt"

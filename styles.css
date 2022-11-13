@@ -266,13 +266,23 @@ iconify-icon {
     align-items: center;
     height: 200%;
     width: 100vw;
-    background: rgba(217, 217, 217, 0.2);
-    backdrop-filter: blur(4px);
+
     visibility: hidden;
 
 }
 
+.modalBack {
+    position: fixed;
+    width: 100vw;
+    height: 200vh;
+    background: rgba(217, 217, 217, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1;
+}
+
+
 .addbookmodal {
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
