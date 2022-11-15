@@ -26,8 +26,12 @@ header {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    gap: 20%;
+    gap: 14%;
     padding: 2em;
+}
+
+.HeaderMobile {
+    display: none;
 }
 
 .main-title {
@@ -315,7 +319,71 @@ iconify-icon {
 
     header {
         flex-direction: column;
+        display: none;
     }
+
+    .HeaderMobile {
+        display: flex;
+        width: 100%;
+
+    }
+
+    .HeaderMobile>div+div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20vw;
+    }
+
+    .BookItem {
+        width: 100%;
+    }
+
+    #Author-List {
+        width: 16vw;
+    }
+
+    .BookImgName {
+        display: flex;
+        align-items: center;
+        margin-left: 2vw;
+        flex-direction: row;
+        margin-left: 2vw;
+        gap: 2px;
+    }
+
+    .divider {
+        opacity: 0;
+    }
+
+    #BookName-List {
+        margin: 2px;
+    }
+
+    .title-bar {
+        margin-top: 20px;
+        width: 96%;
+        height: 64px;
+    }
+
+    .title-bar h4 {
+        margin-left: 8px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    #BookImgpreview {
+
+        margin-left: 0vw;
+        width: 24px;
+        height: 24px;
+        margin: 12px;
+        border-radius: 4px;
+        background-image: url(assets/Default-Book-Img.png);
+        background-size: cover;
+
+    }
+
 
     main {
         width: 96vw;

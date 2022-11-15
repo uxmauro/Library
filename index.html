@@ -31,6 +31,29 @@
         <iconify-icon icon="bi:plus-circle-fill" />
       </button>
     </header>
+    <header class="HeaderMobile">
+      <div class="main-title">
+        <iconify-icon
+          icon="emojione:books"
+          style="font-size: xx-large"
+        ></iconify-icon>
+        <h1>The Bookclub</h1>
+      </div>
+      <div>
+        <a href="http://github.com/uxmauro" target="_blank">
+          <button style="width: 100px; height: 54px">
+            <iconify-icon
+              icon="akar-icons:github-fill"
+              style="font-size: x-large"
+            />
+          </button>
+        </a>
+        <button onclick="OpenModal()">
+          New Book
+          <iconify-icon icon="bi:plus-circle-fill" />
+        </button>
+      </div>
+    </header>
     <main>
       <div class="empty-state">
         <h1>No Books Yet?</h1>
@@ -106,9 +129,9 @@
       <div class="addbookmodal">
         <h2>New Book</h2>
         <form id="BookForm" onsubmit="return false;">
-          <label for="BookName">Book Name</label>
+          <label for="BookName">Book Name *</label>
           <input type="text" id="BookName" />
-          <label for="Author">Author</label>
+          <label for="Author">Author *</label>
           <input type="text" id="Author" />
           <div class="pagenread">
             <div style="display: flex; flex-direction: column; width: 48%">

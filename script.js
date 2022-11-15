@@ -1,3 +1,50 @@
+//DOM Elements
+
+let pic = document.getElementById("Pic");
+let bookname = document.getElementById("BookName");
+let author = document.getElementById("Author");
+let pages = document.getElementById("Pages");
+let read = document.getElementById("Read");
+let submitbutton = document.getElementById("submit")
+let checkbox = document.getElementById("check")
+
+
+
+
+// Bookname and Author 
+
+
+/* function checkboxChange(e) {
+  
+  let Lib =  JSON.parse(localStorage.getItem("Library"));
+  let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
+  let checkbox = document.querySelector("#check")
+  
+  if (checkbox.checked == true) {
+     
+  console.log(e.parentNode)
+
+  }
+/*   let BookIndex = (BooksDisplayed.indexOf(e.parentNode.parentNode)) */
+  
+  /* console.log(Lib[BookIndex].read) */
+
+  /* 
+
+
+   else {
+      alert("UnChecked!");
+
+    
+
+  } */
+
+
+
+
+ 
+
+
 //Library
 
 let myLibrary = JSON.parse(localStorage.getItem("Library") || "[]");
@@ -46,49 +93,58 @@ function Book(pic, author, title, pages, read) {
 }
 
 
-//Adding images to localstorage takes up too much space
-/* let getImg = document.querySelector("#img");
-
-getImg.addEventListener("change", function () {
- const reader = new FileReader();
- reader.addEventListener("load", ()=>{
- localStorage.push("BookImage", reader.result);
- 
- });
- reader.readAsDataURL(this.files[0]); 
-});
- */
-
-
 
 //Add Book To Library // From Save Modal
-function addBookToLibrary() {/* 
-    let img = document.getElementById('img') */
-    let pic = document.getElementById("Pic").value;
-    let bookname = document.getElementById("BookName").value;
-    let author = document.getElementById("Author").value;
-    let pages = document.getElementById("Pages").value;
-    let read = document.getElementById("Read").value;
+function addBookToLibrary() {
+  
+  let picvalue = pic.value
+  let bookvalue = bookname.value
+  let authorvalue = author.value
+  let pagesvalue = pages.value
+  let readvalue = read.value
 
-     if(pic == "" /* && img == undefined */ ){
-     pic = "/assets/Default-Book-Img.png" 
+  /* let img = document.getElementById('img') */
+    
+      console.log(bookvalue)
+     if(picvalue == "" /* && img == undefined */ ){
+      picvalue = "/assets/Default-Book-Img.png" 
     } 
     
- /*    if(img != undefined){
-     pic = uploadedImg
-    }  */
-
-    myLibrary.push(new Book(pic, author, bookname, pages, read))
+    myLibrary.push(new Book(picvalue, authorvalue, bookvalue, pagesvalue, readvalue))
     localStorage.setItem("Library", JSON.stringify(myLibrary));
     closeModal()
     checkIfEmpty()
-    addBookToList(pic, author, bookname, pages, read)
+    addBookToList(picvalue, authorvalue, bookvalue, pagesvalue, readvalue)
     }
 
 
 function OpenModal(){
-    document.querySelector('.addbook').style.visibility = "visible"
+    
+  
+  document.querySelector('.addbook').style.visibility = "visible"
+
+
+ /*  bookname.addEventListener('input', CheckInput);
+  author.addEventListener('input', CheckInput); 
+    
+function CheckInput() {
+  
+ if  (bookname.value != "" && author.value != "") {
+    submitbutton.style.backgroundColor = "#1D476D"
+    submitbutton.style.color = "#FFFFFF"
+    submitbutton.style.cursor = "pointer" 
+    submitbutton.style.pointerEvents = "auto"
+  } else {
+    submitbutton.style.backgroundColor = "#EEEEEE"
+    submitbutton.style.color = "#8D8D8D"
+    submitbutton.style.cursor = "not-allowed"
+    submitbutton.style.pointerEvents = "none"
+
+};
+} */
 }
+
+ 
 
 function closeModal(){
      document.querySelector('.addbook').style.visibility = "hidden"
@@ -160,6 +216,7 @@ function closeModal(){
 
  function editBook(e) {
 
+
   let Lib =  JSON.parse(localStorage.getItem("Library"));
   let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
   
@@ -167,6 +224,7 @@ function closeModal(){
   
   console.log(Lib[BookIndex].title)
   OpenModal()
+
   document.querySelector("#BookName").value = Lib[BookIndex].title
   document.querySelector("#Author").value = Lib[BookIndex].author
   document.querySelector("#Pages").value = Lib[BookIndex].pages
@@ -176,18 +234,16 @@ function closeModal(){
   }else{
   document.querySelector("#Pic").value = Lib[BookIndex].pic}
   document.getElementById("submit").setAttribute("onclick", "editBookModal("+ BookIndex +")")
+  }
 
 
-
- }
 
  function editBookModal(index){
-  let img = document.getElementById('img').value
-    let pic = document.getElementById("Pic").value;
-    let bookname = document.getElementById("BookName").value;
-    let author = document.getElementById("Author").value;
-    let pages = document.getElementById("Pages").value;
-    let read = document.getElementById("Read").value;
+  let pic = document.getElementById("Pic").value;
+  let bookname = document.getElementById("BookName").value;
+  let author = document.getElementById("Author").value;
+  let pages = document.getElementById("Pages").value;
+  let read = document.getElementById("Read").value;
    
     if(pic == ""){
       pic = "/assets/Default-Book-Img.png"
@@ -198,6 +254,9 @@ function closeModal(){
     BooksDisplayed[index].querySelector("#BookName-List").innerHTML = bookname
     BooksDisplayed[index].querySelector("#Author-List").innerHTML = author
     BooksDisplayed[index].querySelector("#Pages-List").innerHTML = pages
+    BooksDisplayed[index].querySelector("#BookImgpreview").style.backgroundImage = 'url('+ pic +')'
+
+
     let Checkbox = BooksDisplayed[index].querySelector("#check")
     if (read == "Yes") {
      Checkbox.checked = true;
@@ -209,6 +268,7 @@ function closeModal(){
     myLibraryEdit[index].title = bookname
     myLibraryEdit[index].author = author
     myLibraryEdit[index].pages = pages
+    myLibraryEdit[index].pic = pic
     myLibraryEdit[index].read = read
     localStorage.setItem("Library", JSON.stringify(myLibraryEdit))
 
@@ -249,3 +309,40 @@ function deleteBook(e) {
 }
 
 
+
+
+
+
+
+//Adding images to localstorage takes up too much space
+/* let getImg = document.querySelector("#img");
+
+getImg.addEventListener("change", function () {
+ const reader = new FileReader();
+ reader.addEventListener("load", ()=>{
+ localStorage.push("BookImage", reader.result);
+ 
+ });
+ reader.readAsDataURL(this.files[0]); 
+});
+ */
+
+/* 
+bookname.addEventListener('input', CheckInput);
+author.addEventListener('input', CheckInput); 
+
+
+ function CheckInput() {
+      if (bookname.value == "" || author.value == "") {
+        submitbutton.style.backgroundColor = "#EEEEEE"
+        submitbutton.style.color = "#8D8D8D"
+        submitbutton.style.cursor = "not-allowed"
+        submitbutton.removeEventListener("click", addBookToLibrary)
+       } else{
+        submitbutton.style.backgroundColor = "#1D476D"
+        submitbutton.style.color = "#FFFFFF"
+        submitbutton.style.cursor = "pointer"
+        submitbutton.addEventListener("click", addBookToLibrary)
+      }
+    };
+ */
