@@ -8,39 +8,48 @@ let read = document.getElementById("Read");
 let submitbutton = document.getElementById("submit")
 let checkbox = document.getElementById("check")
 
+bookname.addEventListener('input', CheckInput);
+author.addEventListener('input', CheckInput); 
 
-
-
-// Bookname and Author 
-
-
-/* function checkboxChange(e) {
-  
-  let Lib =  JSON.parse(localStorage.getItem("Library"));
-  let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
-  let checkbox = document.querySelector("#check")
-  
-  if (checkbox.checked == true) {
-     
-  console.log(e.parentNode)
-
+/* 
+checkbox.addEventListener("change", (e) => {
+  if (e.target.checked) {
+    console.log("Checkbox is checked..");
   }
-/*   let BookIndex = (BooksDisplayed.indexOf(e.parentNode.parentNode)) */
-  
-  /* console.log(Lib[BookIndex].read) */
-
-  /* 
-
-
-   else {
-      alert("UnChecked!");
-
-    
-
-  } */
+}) */
 
 
 
+ function CheckInput() {
+      if (bookname.value == "" || author.value == "") {
+        submitbutton.style.backgroundColor = "#EEEEEE"
+        submitbutton.style.color = "#8D8D8D"
+        submitbutton.style.cursor = "not-allowed"
+        submitbutton.removeEventListener("click", addBookToLibrary)
+       } else{
+        submitbutton.style.backgroundColor = "#1D476D"
+        submitbutton.style.color = "#FFFFFF"
+        submitbutton.style.cursor = "pointer"
+        submitbutton.addEventListener("click", addBookToLibrary)
+      }
+    };
+
+
+
+
+  function readChecked(e){
+    let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)
+    let BookIndex = (BooksDisplayed.indexOf(e.target.parentNode.parentNode.parentNode)) 
+    let myLibraryEdit = JSON.parse(localStorage.getItem("Library"))
+    {
+      if (e.target.checked){
+        myLibraryEdit[BookIndex].read = "Yes"
+        localStorage.setItem("Library", JSON.stringify(myLibraryEdit))
+      }else{
+        myLibraryEdit[BookIndex].read = "No"
+        localStorage.setItem("Library", JSON.stringify(myLibraryEdit))
+      }}
+  }
 
  
 
@@ -63,6 +72,7 @@ while (i < myLibrary.length) {
 }
 
 checkIfEmpty()
+
 //initial state of the library
 function checkIfEmpty() {
 
@@ -93,7 +103,6 @@ function Book(pic, author, title, pages, read) {
 }
 
 
-
 //Add Book To Library // From Save Modal
 function addBookToLibrary() {
   
@@ -119,29 +128,11 @@ function addBookToLibrary() {
 
 
 function OpenModal(){
-    
-  
+  CheckInput()
   document.querySelector('.addbook').style.visibility = "visible"
+  document.getElementById("submitEdit").style.display = "none"
+  document.getElementById("submit").style.display = "inline"
 
-
- /*  bookname.addEventListener('input', CheckInput);
-  author.addEventListener('input', CheckInput); 
-    
-function CheckInput() {
-  
- if  (bookname.value != "" && author.value != "") {
-    submitbutton.style.backgroundColor = "#1D476D"
-    submitbutton.style.color = "#FFFFFF"
-    submitbutton.style.cursor = "pointer" 
-    submitbutton.style.pointerEvents = "auto"
-  } else {
-    submitbutton.style.backgroundColor = "#EEEEEE"
-    submitbutton.style.color = "#8D8D8D"
-    submitbutton.style.cursor = "not-allowed"
-    submitbutton.style.pointerEvents = "none"
-
-};
-} */
 }
 
  
@@ -194,6 +185,7 @@ function closeModal(){
     const CheckLabel = document.createElement("label")
     const Checkbox = document.createElement("input")
     Checkbox.setAttribute("id", "check")
+    Checkbox.addEventListener('change', e => readChecked(e))
     if (read == "Yes") {
       Checkbox.checked = true;
     }
@@ -233,7 +225,9 @@ function closeModal(){
     document.querySelector("#Pic").value = ""
   }else{
   document.querySelector("#Pic").value = Lib[BookIndex].pic}
-  document.getElementById("submit").setAttribute("onclick", "editBookModal("+ BookIndex +")")
+  document.getElementById("submit").style.display = "none"
+  document.getElementById("submitEdit").style.display = "inline"
+  document.getElementById("submitEdit").setAttribute("onclick", "editBookModal("+ BookIndex +")")
   }
 
 
@@ -325,24 +319,4 @@ getImg.addEventListener("change", function () {
  });
  reader.readAsDataURL(this.files[0]); 
 });
- */
-
-/* 
-bookname.addEventListener('input', CheckInput);
-author.addEventListener('input', CheckInput); 
-
-
- function CheckInput() {
-      if (bookname.value == "" || author.value == "") {
-        submitbutton.style.backgroundColor = "#EEEEEE"
-        submitbutton.style.color = "#8D8D8D"
-        submitbutton.style.cursor = "not-allowed"
-        submitbutton.removeEventListener("click", addBookToLibrary)
-       } else{
-        submitbutton.style.backgroundColor = "#1D476D"
-        submitbutton.style.color = "#FFFFFF"
-        submitbutton.style.cursor = "pointer"
-        submitbutton.addEventListener("click", addBookToLibrary)
-      }
-    };
  */

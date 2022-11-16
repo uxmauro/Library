@@ -450,6 +450,11 @@ label {
 
 }
 
+#submitEdit {
+    display: none;
+}
+
+
 .Add-book-button:hover {
     background-color: #133D63;
     transition: 0.2s;
