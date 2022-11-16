@@ -65,7 +65,7 @@ let i = 0;
 while (i < myLibrary.length) {
     console.table(myLibrary[i]);
     if (myLibrary[i].pic == "" ) {
-      myLibrary[i].pic = "/assets/Default-Book-Img.png"
+      myLibrary[i].pic = "/assets/defaultimage.png"
     }
     addBookToList(myLibrary[i].pic, myLibrary[i].author, myLibrary[i].title, myLibrary[i].pages, myLibrary[i].read)
     i++;
@@ -116,7 +116,7 @@ function addBookToLibrary() {
     
       console.log(bookvalue)
      if(picvalue == "" /* && img == undefined */ ){
-      picvalue = "/assets/Default-Book-Img.png" 
+      picvalue = "/assets/defaultimage.png" 
     } 
     
     myLibrary.push(new Book(picvalue, authorvalue, bookvalue, pagesvalue, readvalue))
@@ -221,7 +221,7 @@ function closeModal(){
   document.querySelector("#Author").value = Lib[BookIndex].author
   document.querySelector("#Pages").value = Lib[BookIndex].pages
   document.querySelector("#Read").value = Lib[BookIndex].read
-  if (Lib[BookIndex].pic == "/assets/Default-Book-Img.png") {
+  if (Lib[BookIndex].pic == "/assets/defaultimage.png") {
     document.querySelector("#Pic").value = ""
   }else{
   document.querySelector("#Pic").value = Lib[BookIndex].pic}
@@ -240,7 +240,7 @@ function closeModal(){
   let read = document.getElementById("Read").value;
    
     if(pic == ""){
-      pic = "/assets/Default-Book-Img.png"
+      pic = "/assets/defaultimage.png"
     }
 
     let BooksDisplayed = Array.from(document.getElementById("listofBooks").children)

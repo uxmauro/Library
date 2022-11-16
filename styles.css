@@ -237,7 +237,7 @@ iconify-icon {
     width: 32px;
     height: 32px;
     border-radius: 4px;
-    background-image: url(assets/Default-Book-Img.png);
+    background-image: url(assets/defaultimage.png);
     background-size: cover;
 
 }
@@ -379,7 +379,7 @@ iconify-icon {
         height: 24px;
         margin: 12px;
         border-radius: 4px;
-        background-image: url(assets/Default-Book-Img.png);
+        background-image: url(assets/defaultimage.png);
         background-size: cover;
 
     }
