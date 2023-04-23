@@ -8,4 +8,4 @@
 <br>
 
  Library for the Odin Project
-[Preview](https://uxmauro.com/Library) 👀
+[Preview](https://uxmauro.github.io/Library/) 👀
